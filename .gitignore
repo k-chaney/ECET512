@@ -1,0 +1,13 @@
+*.bak
+*.mti
+*~
+*.swp
+*.swo
+
+*.avi
+*.jpg
+*.jpeg
+*.png
+*.db
+
+*.gz
