@@ -1,4 +1,4 @@
-function [cell_centers, cell_names] = generateCluster( center_position, iValue, jValue, cellRadius )
+function [cell_names, cell_centers] = generateCluster( center_position, iValue, jValue, cellRadius )
 % drawCluster.m
 %     Kenneth P Chaney
 %        
@@ -16,7 +16,7 @@ function [cell_centers, cell_names] = generateCluster( center_position, iValue, 
 
 names={'A_','B_','C_','D_','E_','F_','G_',};
 cell_centers = [];
-cell_names = [];
+cell_names = {};
 cur_center=1;
 
 cell_height = sqrt( cellRadius * 3 / 2 );
@@ -25,8 +25,14 @@ cell_height = sqrt( cellRadius * 3 / 2 );
 section_num = 1;
 
 cell_centers(cur_center)=center_position;
-cell_names(cur_center)=[names(section_num) num2str(1)];
+cell_names(cur_center)=names(section_num);
 cur_center=cur_center+1;
 
 temp = ( cell_height * iValue ) + ( cos(pi/3) * jValue * cell_height ) + ( sin(pi/3) * jValue * cell_height )*j;
+cell_centers(cur_center) = temp;
+cell_names(cur_center)=names(section_num);
+angle = atan2(imag(temp),real(temp));
+radius = sqrt(imag(temp)^2+real(temp)^2);
+cell_centers(cur_center+1)=radius*cos(angle+pi/3)+radius*sin(angle+pi/3)*1i;
+cell_names(cur_center+1)=names(section_num);
 

@@ -17,6 +17,7 @@ movieFrames = moviein(numFrames);
 
 % generates linearly spaced vector
 mobilePos = linspace( -50-50*j, 50+50*j, numFrames );
+[names, centers] = generateCluster( 0, 1, 1, 100 );
 
 for index = 1:numFrames    % Draw each frame in the movie
     figure(1);
@@ -25,7 +26,7 @@ for index = 1:numFrames    % Draw each frame in the movie
     axis off;
     
     % Draw the serving cell and label it
-    drawCluster( 0, 1, 1, 100 );
+    success = drawCluster( names, centers, 100 );
     
     % Draw the mobile user at the appropriate location
     plot( mobilePos(index), 'x' );
