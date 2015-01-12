@@ -19,11 +19,13 @@ success = 0;
 if( size(cell_names) ~= size(cell_positions) )
 	success = 1;
 	return;
-elseif( size(cell_names)(1) == 1  ||  size(cell_names)(2) == 1 )
-	success = 2;
-	return;
+% elseif( (size(cell_names) == [1, ndims(cell_names)])  ||  (size(cell_names) == [ndims(cell_names), 1]) )
+% 	success = 2;
+% 	return;
 end
 
-for i=1:ndims(cell_names)
-	drawCell( cell_positions(i), cell_radius, cell_names(i) );
+curSize = size(cell_names);
+
+for i=1:curSize(2);
+	drawCell( cell_positions(i), cell_radius, cell_names{i} );
 end
