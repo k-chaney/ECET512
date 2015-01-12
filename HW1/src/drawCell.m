@@ -1,6 +1,7 @@
-function drawCell( center, radius, cellName )
+function drawCell( center, radius, cellName, color )
 % drawCell.m
 %     Kapil R. Dandekar
+%     With some edits by: Kenneth Chaney
 %     ECE-T512 - Wireless Systems Matlab Courseware
 %        
 %     This program draws a hexagonal cell with
@@ -18,5 +19,5 @@ function drawCell( center, radius, cellName )
 %         LaTex formatting can be used in matlab to make text
 %         look better
 
-plot( center  + radius * exp(j*pi*(0:2:12)/6), 'k');
-text( real(center), imag(center), cellName );
+plot( center  + radius * exp(j*pi*(0:2:12)/6), color);
+text( real(center), imag(center), cellName, 'Color', color );
