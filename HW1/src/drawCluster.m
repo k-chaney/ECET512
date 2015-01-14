@@ -1,4 +1,4 @@
-function success = generateCluster( cell_names, cell_positions, cell_radius )
+function success = drawCluster( cell_names, cell_positions, cell_radius )
 % drawCluster.m
 %     Kenneth P Chaney
 %        

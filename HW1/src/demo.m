@@ -1,15 +1,24 @@
 clear, clc, close all;
-% Set up parameters for Matlab movie
-numFrames = 150;    % Number of images/frames in the movie
+
+% Set up parameters
+numFrames = 150;
+iValue = 2;
+jValue = 1;
+centerPosition = 0;
+cellRadius = 100;
+
+% DONT EDIT BELOW THIS
 
 movieFrames = moviein(numFrames);
 
 % generates linearly spaced vector
+% dumb random assignment right now. Not parameterized.
 mobilePos = linspace( -randi(100)-250-(randi(100)+100)*1i, ...
     randi(200)-100+(randi(200)+200)*1i, numFrames );
 mobile_power = zeros([numFrames,1]);
 
-[cell_names, cell_centers] = generateCluster( 0, 2, 1, 100 );
+[cell_names, cell_centers] = generateCluster( centerPosition, iValue, jValue, ... 
+    cellRadius );
 
 userColor = [];
 
@@ -66,30 +75,3 @@ end
 % outputs movie to doc folder with a framerate of 15 fps. The movie will
 % last numframes/15fps
 movie2avi( movieFrames, '../doc/demo.avi','fps',15);
-
-figure(2);
-clf;
-axis off;
-hold on;
-[cell_names, cell_centers] = generateCluster( 0,  0, 1, 100 );
-% draw cluster
-success = drawCluster( cell_names, cell_centers, 100 );
-hold off;
-
-figure(3);
-clf;
-axis off;
-hold on;
-[cell_names, cell_centers] = generateCluster( 0,  1, 1, 100 );
-% draw cluster
-success = drawCluster( cell_names, cell_centers, 100 );
-hold off;
-
-figure(4);
-clf;
-axis off;
-hold on;
-[cell_names, cell_centers] = generateCluster( 0,  2, 1, 100 );
-% draw cluster
-success = drawCluster( cell_names, cell_centers, 100 );
-hold off;
