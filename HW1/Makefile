@@ -12,14 +12,16 @@ report:
 #       $(BIBTEX) $(PROJECT).aux
 	$(BUILDTEX)
 	$(BUILDTEX)
-	mv main.pdf doc/report.pdf
+	mv main.pdf report.pdf
 	rm *.aux
 	rm *.log
 
 tar: report
+	rm */*~
 	mkdir $(HW_NAME)
 	cp -r doc $(HW_NAME)
 	cp -r src $(HW_NAME)
+	cp report.pdf $(HW_NAME)
 	rm $(HW_NAME)/src/*.asv
 	tar cvzf $(HW_NAME).tar.gz $(HW_NAME)
 	rm -rf $(HW_NAME)

@@ -84,11 +84,35 @@ Figures \ref{N1}, \ref{N3}, and \ref{N7} are examples of these functions working
 \caption{Example of cell layout where N=7}
 \label{N7}
 \end{figure}
-
+\clearpage
 \section{How To Run}\label{run}
 
-The code is straight forward to run. The demo is already set up to run and generate a movie called "demo.avi" directly into the doc folder. At the top of the demo file there are parameters that can be edited to change the simulation.
+The code is straight forward to run. The demo is already set up to run and generate a movie called 'demo.avi' directly into the doc folder. At the top of the demo file there are parameters that can be edited to change the simulation.
 
+Functions that were created and can be tested:
+\begin{verbatim}
+
+
+function [cell_names, cell_centers] = generateCluster(
+		 center_position, iValue, jValue, cellRadius )
+--This generates the cell_names and cell_centers
+--to be used later in calculations and plotting
+
+function success = drawCluster( cell_names, cell_positions, cell_radius )
+--Draws the cluster that was generated.
+
+function [cellNumber, tierNumber, center] = findServingCell(
+			 mobileLocation, cellCenters, cellNames )
+--This finds the closest serving cell near the mobile user. 
+--Returns which cell is closest.
+
+function power = friisFreeSpace(d)
+--This calculates the power based off of the distance
+
+function [r,g,b] = generateColor(Pr)
+--This generates a color for the line and user based on the recieved power
+
+\end{verbatim}
 
 %\clearpage
 %----------------------------------------------------------------------------------------
