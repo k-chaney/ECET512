@@ -1,4 +1,4 @@
-function [r,g,b] = generateColor(d)
+function [r,g,b] = generateColor(Pr)
 %
 %  returns the color for the line that represents signal strength
 %
@@ -7,14 +7,15 @@ function [r,g,b] = generateColor(d)
 %                   that is treated as ideal value
 %
 %  Input:
-%	-- d -- distance
+%	-- Pr -- power recieved
+%	-- Max -- max power expected to be recieved
 %  Output:
 %	-- r - red portion
 %	-- g - green portion
 %	-- b - blue portion
 
 
-    power = friisFreeSpace(d);
+    power = Pr;
     r = max([0,min([1,1-power])]);
     g = max([0,min([1,power])]);
     b = 0;

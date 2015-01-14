@@ -7,6 +7,7 @@ function power = friisFreeSpace(d)
 %  Output:
 %	-- power -- recieving power from the base station
 
-	k = 500.0;
-	pt = 500.0;
-	power = pt*k*(1/(4*pi*d))^2;
+	k = 10.0;
+	pt = 100.0;
+    lambda = 10.0;
+	power = pt*k*(lambda/(4*pi*d))^2;
