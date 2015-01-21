@@ -1,4 +1,6 @@
-function [signal_strength, signal_interference] = findUserInfo( mobile_location, cell_centers, cell_nums, tier_nums, cell_radius )
+function [signal_strength, signal_interference] = findUserInfo( ...
+    mobile_location, cell_centers, cell_nums, tier_nums, cell_radius, ...
+    ref_dist, ref_power, beta, shadow_variance)
 
 findInterferingCells = 0; % 0 means no anything else means yes
 equation = 1; % 0 means friisFreeSpace  --  1 means pathLossModel
@@ -18,7 +20,7 @@ line( [real(connected_cp) real(mobile_location)], ...
     'Color', 'g' );
 
 if (equation == 1)
-    signal_strength = pathLossModel(1, 1e-3, 4, 0, ...
+    signal_strength = pathLossModel(ref_dist, ref_power, beta, shadow_variance, ...
         abs(mobile_location-connected_cp)); % in watts
 else
     signal_strength = friisFreeSpace(abs(mobile_location-connected_cp));
@@ -34,8 +36,8 @@ if (findInterferingCells ~= 0)
                 'Color', 'r' );
             
             if (equation == 1)
-                signal_interference = pathLossModel(1, 1e-3, -4, 8, ...
-                    abs(mobile_location-connected_cp));
+                signal_interference = pathLossModel(ref_dist, ref_power, ...
+                    beta, shadow_variance, abs(mobile_location-connected_cp));
             else
                 signal_interference = friisFreeSpace( ...
                     abs(mobile_location-cell_centers(a)));

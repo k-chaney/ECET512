@@ -1,4 +1,4 @@
-HW_NAME = kchaney-hw1
+HW_NAME = kchaney-hw2
 FOLDER = latex
 PROJECT = main
 TEX = pdflatex
@@ -12,12 +12,13 @@ report:
 #       $(BIBTEX) $(PROJECT).aux
 	$(BUILDTEX)
 	$(BUILDTEX)
-	mv main.pdf doc/report.pdf
+	cp main.pdf doc/report.pdf
 	rm *.aux
 	rm *.log
 
 tar: report
 	mkdir $(HW_NAME)
+	cp doc/report.pdf $(HW_NAME)
 	cp -r doc $(HW_NAME)
 	cp -r src $(HW_NAME)
 	rm $(HW_NAME)/src/*.asv
