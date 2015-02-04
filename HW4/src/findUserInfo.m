@@ -1,14 +1,20 @@
 function [signal_strength, signal_interference, connected_index] = findUserInfo( ...
     mobile_location, cell_centers, cell_nums, tier_nums, cell_radius, ...
-    ref_dist, ref_power, beta, shadow_variance)
+    ref_dist, ref_power, beta, shadow_variance,lambda)
 
 findInterferingCells = 0; % 0 means no anything else means yes
-equation = 1; % 0 means friisFreeSpace  --  1 means pathLossModel
+equation = 2; % 0 means friisFreeSpace  --  1 means pathLossModel
+% 2 means the antenna one
 
 % finds the serving cell for the single user that is being presented
 [connected_cn, connected_tn, connected_cp] = findServingCell( ...
     mobile_location, cell_centers, cell_nums, tier_nums );
-drawCell( connected_cp, cell_radius, '', 'g' );
+
+% drawCell( connected_cp, cell_radius, '', 'g' );
+drawSector( connected_cp, cell_radius, 'g', ...
+    atan2( imag(mobile_location-connected_cp), ...
+    real(mobile_location-connected_cp)) );
+
 
 % Draw the mobile user at the appropriate location
 plot( mobile_location, '*', 'Color', 'k' );
@@ -19,7 +25,28 @@ line( [real(connected_cp) real(mobile_location)], ...
     [imag(connected_cp) imag(mobile_location)], ...
     'Color', 'g' );
 
-if (equation == 1)
+if (equation == 2)
+    angle =  atan2( imag(mobile_location-connected_cp), ...
+        real(mobile_location-connected_cp));
+    
+    if angle <-2/3*pi
+        angle = angle + 5/6*pi;
+    elseif angle < -1/3*pi
+        angle = angle + 3/6*pi;
+    elseif angle < 0
+        angle = angle + 1/6*pi;
+    elseif angle < pi/3
+        angle = angle - 1/6*pi;
+    elseif angle < 2/3*pi
+        angle = angle - 3/6*pi;
+    else
+        angle = angle - 5/6*pi;
+    end
+    
+    signal_strength = farfield(angle, pi/2, ...
+        abs(mobile_location-connected_cp), lambda, ref_power);
+    
+elseif (equation == 1)
     signal_strength = pathLossModel(ref_dist, ref_power, beta, shadow_variance, ...
         abs(mobile_location-connected_cp)); % in watts
 else

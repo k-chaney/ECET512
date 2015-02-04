@@ -20,4 +20,5 @@ function drawCell( center, radius, cellName, color )
 %         look better
 
 plot( center  + radius * exp(j*pi*(0:2:12)/6), color);
+plot( [ center*ones([7,1]), center  + radius * exp(j*pi*[0:2:12]'/6)]', color);
 text( real(center), imag(center), cellName, 'Color', color );
